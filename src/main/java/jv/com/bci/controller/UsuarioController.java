@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 public class UsuarioController {
 
     private final String EMAIL_FORMATO_INCORRECTO= "El email tiene formato incorrecto( ej.correcto: (aaaaaaa@dominio.cl))";
-    private final String EMAIL_YA_EXISTENTE= "Ya existe un usuario con ese email!";
+    private final String EMAIL_YA_EXISTENTE= "El correo ya esta registrado!";
     @Autowired
     private IUsuarioService usuarioService;
 
