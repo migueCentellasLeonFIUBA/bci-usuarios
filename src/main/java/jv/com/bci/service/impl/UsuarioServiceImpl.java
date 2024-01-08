@@ -14,6 +14,8 @@ import jv.com.bci.service.IUsuarioService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,8 @@ public class UsuarioServiceImpl implements IUsuarioService {
                             PhoneUsuario phoneUsuario = new PhoneUsuario();
                             phoneUsuario.setPhoneId(p.getId());
                             usuario.addPhoneUsuario(phoneUsuario);} );
-
+        String token = getJWTToken(usuarioDTO.getEmail());
+        usuario.setToken(token);
         usuarioRepository.save(usuario);
         UsuarioResponseDTO usuarioResponseDTO = usuarioMapper.toResponseDto(usuario);
         return usuarioResponseDTO;
@@ -99,6 +102,22 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Transactional(readOnly = true)
     private List<Phone> obtenerPhonesPorUsuario(Iterable<Long> ids) {
         return (List<Phone>) phoneRepository.findAllById(ids);
+    }
+
+
+    private String getJWTToken(String username) {
+        String secretKey = "mySecretKey";
+
+        String token = Jwts
+                .builder()
+                .setId("bciJWT")
+                .setSubject(username)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .signWith(SignatureAlgorithm.HS512,
+                        secretKey.getBytes()).compact();
+
+        return token;
     }
 
 }

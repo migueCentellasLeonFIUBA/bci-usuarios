@@ -52,6 +52,11 @@ public class Usuario {
 
     @Column(name = "isActive")
     private boolean isActive;
+
+    @Lob
+    @Column(name="token")
+    private String token;
+
     public void addPhoneUsuario(PhoneUsuario phoneUsuario) {
         phoneUsuarios.add(phoneUsuario);
     }

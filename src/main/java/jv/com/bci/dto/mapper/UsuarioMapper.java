@@ -36,6 +36,7 @@ public class UsuarioMapper {
         usuarioDTO.setModified(usuario.getUpdateAt());
         usuarioDTO.setLastLogin(usuario.getLastLogin());
         usuarioDTO.setActive(usuario.isActive());
+        usuarioDTO.setToken(usuario.getToken());
 
         return usuarioDTO;
     }
