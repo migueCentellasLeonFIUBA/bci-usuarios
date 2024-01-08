@@ -3,8 +3,6 @@ package jv.com.bci.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import java.util.Date;
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -16,13 +14,13 @@ public class UsuarioResponseDTO {
     private Long id;
 
     @JsonProperty("created")
-    private Date created;
+    private String created;
 
     @JsonProperty("modified")
-    private Date modified;
+    private String modified;
 
     @JsonProperty("last_login")
-    private Date lastLogin;
+    private String lastLogin;
 
     @JsonProperty("token")
     private String token;

@@ -1,5 +1,7 @@
 package jv.com.bci.service.impl;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jv.com.bci.dto.PhoneDTO;
 import jv.com.bci.dto.UsuarioDTO;
 import jv.com.bci.dto.UsuarioResponseDTO;
@@ -11,11 +13,9 @@ import jv.com.bci.entity.Usuario;
 import jv.com.bci.repository.PhoneRepository;
 import jv.com.bci.repository.UsuarioRepository;
 import jv.com.bci.service.IUsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 import java.util.List;

@@ -3,10 +3,10 @@ package jv.com.bci.dto.mapper;
 import jv.com.bci.dto.PhoneDTO;
 import jv.com.bci.dto.UsuarioDTO;
 import jv.com.bci.dto.UsuarioResponseDTO;
-import jv.com.bci.entity.Phone;
 import jv.com.bci.entity.Usuario;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Component
@@ -32,9 +32,9 @@ public class UsuarioMapper {
     public UsuarioResponseDTO toResponseDto(Usuario usuario){
         UsuarioResponseDTO usuarioDTO = new UsuarioResponseDTO();
         usuarioDTO.setId(usuario.getId());
-        usuarioDTO.setCreated(usuario.getCreateAt());
-        usuarioDTO.setModified(usuario.getUpdateAt());
-        usuarioDTO.setLastLogin(usuario.getLastLogin());
+        usuarioDTO.setCreated(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(usuario.getCreateAt()));
+        usuarioDTO.setModified(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(usuario.getUpdateAt()));
+        usuarioDTO.setLastLogin(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(usuario.getLastLogin()));
         usuarioDTO.setActive(usuario.isActive());
         usuarioDTO.setToken(usuario.getToken());
 

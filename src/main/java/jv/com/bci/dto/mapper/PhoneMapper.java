@@ -1,12 +1,8 @@
 package jv.com.bci.dto.mapper;
 
 import jv.com.bci.dto.PhoneDTO;
-import jv.com.bci.dto.UsuarioDTO;
 import jv.com.bci.entity.Phone;
-import jv.com.bci.entity.Usuario;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class PhoneMapper {
