@@ -2,6 +2,9 @@ package jv.com.bci.controller;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import jv.com.bci.dto.UsuarioDTO;
 import jv.com.bci.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,7 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
+    @ApiOperation(value = "Creacion de usuarios via Json")
     @PostMapping()
     public ResponseEntity<?> crear( @Valid @RequestBody  UsuarioDTO usuarioDTO, BindingResult result) {
         ResponseEntity<Map<String, String>> errorValidador = validadores(usuarioDTO, result);
@@ -49,6 +53,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.crearUsuario(usuarioDTO));
     }
 
+    @ApiOperation(value = "Obtencion de usuario por Id")
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         Optional<UsuarioDTO> o = usuarioService.obtenerPorId(id);//service.porId(id);
@@ -58,6 +63,7 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @ApiOperation(value = "actualizacion de Usuario con su ID y JSON de actualizacion(solo name, email o password)")
     @PutMapping("/{id}")
     public ResponseEntity<?> editar(@Valid @RequestBody UsuarioDTO usuarioDTO, BindingResult result, @PathVariable Long id) {
         ResponseEntity<Map<String, String>> errorValidador = validadores(usuarioDTO, result);
@@ -75,12 +81,14 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @ApiOperation(value = "Eliminacion Fisica de usuario")
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "usuario eliminado exitosamente")})
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
         Optional<UsuarioDTO> o = usuarioService.obtenerPorId(id);
         if (o.isPresent()) {
             usuarioService.eliminar(id);
-            return ResponseEntity.noContent().build();
+            return new ResponseEntity<String>("usuario eliminado exitosamente",HttpStatus.OK);
         }
         return ResponseEntity.notFound().build();
     }
